@@ -2,8 +2,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Dashboard from "./compenents/Dashbord"; // Assurez-vous que le chemin est correct
-import Login from './views/Login'; // Assurez-vous que le chemin est correct
-import Logout from './views/Logout'; // Importez le composant Logout
+import Login from './views/login'; // Assurez-vous que le chemin est correct
+import Logout from './views/logout'; // Importez le composant Logout
 import RapportTable from './compenents/Pages/Rapports/RapportTable'; // Importez le composant RapportTable
 import TablesProjet from './compenents/Pages/Rapports/Projets/TablesProjet'; // Importez le composant TablesProjet
 import { useAuthStore } from './store/auth'; // Import your authentication store
