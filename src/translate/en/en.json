@@ -1,0 +1,17 @@
+{
+  "title": "Title",
+  "description": "Description",
+  "date": "Date",
+  "status": "Status",
+  "author": "Author",
+  "project": "Project",
+  "actions": "Actions",
+  "search": "Search",
+  "start_date": "Start Date",
+  "end_date": "End Date",
+  "rejected": "Rejected",
+  "approved": "Approved",
+  "pending": "Pending",
+  "confirm_approve": "Are you sure you want to approve this report?",
+  "confirm_reject": "Are you sure you want to reject this report?"
+}
