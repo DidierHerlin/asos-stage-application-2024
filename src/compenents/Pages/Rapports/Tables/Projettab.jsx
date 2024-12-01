@@ -24,7 +24,7 @@ import jsPDF from 'jspdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import Papa from 'papaparse';
-import { fetchProjets, deleteProjet, editProjet } from '../../../../utils/api'; // Import API functions
+import { fetchProjets, deleteProjet, editProjet,addProjet } from '../../../../utils/api'; // Import API functions
 import Swal from 'sweetalert2'; // Ensure Swal is imported for alerts
 
 const TableProjet = () => {
@@ -83,6 +83,10 @@ const TableProjet = () => {
       }
     }
   };
+  const handleClose = () => {
+    setIsCreating(false);
+  };
+
 
   const handleOpenEditModal = (projet) => {
     setCurrentProjet(projet);
@@ -109,7 +113,7 @@ const TableProjet = () => {
     }
   };
 
-  const validateProjet = (projet) => {
+  const addProjet = (projet) => {
     const errors = {};
     if (!projet.nom_projet) errors.nom_projet = 'Nom requis'; // Adjust based on your Projet model
     // Add more validations as necessary
@@ -123,9 +127,17 @@ const TableProjet = () => {
       setValidationErrors(errors);
       return;
     }
+    // Ajouter le projet à la liste
     setProjets((prev) => [...prev, newProjet]);
-    setIsCreating(false);
-    setCurrentProjet(null);
+    setIsCreating(false); // Fermer la modal après ajout
+    setCurrentProjet({ nom_projet: '' }); // Réinitialiser l'état du projet
+  };
+
+  const validateProjet = (projet) => {
+    const errors = {};
+    if (!projet.nom_projet) errors.nom_projet = 'Nom requis';
+    // Vous pouvez ajouter plus de validations ici
+    return errors;
   };
 
   const handleUpdateProjet = () => {
@@ -177,6 +189,10 @@ const TableProjet = () => {
     saveAs(blob, 'projets.csv');
   };
 
+
+  const handleOpen = () => {
+    setIsCreating(true);
+  };
   return (
     <Box sx={{ padding: 2 }}>
       <TextField
@@ -185,9 +201,11 @@ const TableProjet = () => {
         fullWidth
         value={searchTerm}
         onChange={handleSearchChange}
-        sx={{ marginBottom: 2 }}
+        InputLabelProps={{ shrink: true, className: 'dark:text-gray-400' }}
+          className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+          sx={{ flexGrow: 1, minWidth: '200px' }}
       />
-      <Box sx={{ marginBottom: 2 }}>
+      <Box sx={{ marginBottom: 2 ,mt :4}}>
         <Button onClick={downloadPDF} variant="contained" color="primary" sx={{ marginRight: 1 }}>
           Download PDF
         </Button>
@@ -198,25 +216,28 @@ const TableProjet = () => {
           Download CSV
         </Button>
       </Box>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
+        Ajouter un projet
+      </Button>
 
-      <TableContainer component={Paper} sx={{ marginTop: 2 }}>
+      <TableContainer component={Paper} sx={{ marginTop: 2 }} className="dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500">
         <Table>
       
-        <TableHead>
+        <TableHead >
           <TableRow>
-            <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Name</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Actions</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">ID</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">Name</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">Actions</TableCell>
           </TableRow>
         </TableHead>
 
-          <TableBody>
+          <TableBody className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
             {paginatedProjets.map((projet) => (
               <TableRow key={projet.id}>
-                <TableCell>{projet.id}</TableCell>
-                <TableCell>{projet.nom_projet}</TableCell>
-                <TableCell>
-                  <Tooltip title="Edit">
+                <TableCell className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">{projet.id}</TableCell>
+                <TableCell className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">{projet.nom_projet}</TableCell>
+                <TableCell className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+                  <Tooltip title="Edit" className='dark:text-blue-500'>
                     <IconButton onClick={() => handleOpenEditModal(projet)}>
                       <EditIcon />
                     </IconButton>
@@ -241,32 +262,33 @@ const TableProjet = () => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
       />
 
-      {/* Create User Dialog */}
-      <Dialog open={isCreating} onClose={() => setIsCreating(false)}>
-        <DialogTitle>Create New Projet</DialogTitle>
-        <DialogContent>
+      <Dialog open={isCreating} onClose={handleClose}>
+      <DialogTitle className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">Create New Projet</DialogTitle>
+      <DialogContent className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
           <TextField
-            label="Name"
+            label="Nom du projet"
             fullWidth
             value={currentProjet?.nom_projet || ''}
             onChange={(e) => setCurrentProjet({ ...currentProjet, nom_projet: e.target.value })}
             error={!!validationErrors.nom_projet}
             helperText={validationErrors.nom_projet}
             onFocus={() => setValidationErrors({})}
+            className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setIsCreating(false)}>Cancel</Button>
-          <Button onClick={handleCreateProjet}>Create</Button>
+        <DialogActions className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+          <Button onClick={() => setIsCreating(false)} className="dark:bg-gray-600 dark:text-red-500 dark:border-gray-500">Cancel</Button>
+          <Button onClick={handleCreateProjet} className="dark:bg-gray-600 dark:text-blue-500 dark:border-gray-500">Create</Button>
         </DialogActions>
       </Dialog>
 
       {/* Edit User Dialog */}
-      <Dialog open={isEditing} onClose={handleCloseEditModal}>
-        <DialogTitle>Edit Projet</DialogTitle>
-        <DialogContent>
+      <Dialog open={isEditing} onClose={handleCloseEditModal} >
+        <DialogTitle className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">Edit Projet</DialogTitle>
+        <DialogContent className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
           <TextField
             label="Name"
             fullWidth
@@ -275,11 +297,13 @@ const TableProjet = () => {
             error={!!validationErrors.nom_projet}
             helperText={validationErrors.nom_projet}
             onFocus={() => setValidationErrors({})}
+            InputLabelProps={{ shrink: true, className: 'dark:text-gray-200' }}
+          className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
           />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEditModal}>Cancel</Button>
-          <Button onClick={handleEditSubmit}>Save</Button>
+        </DialogContent >
+        <DialogActions  className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+          <Button onClick={handleCloseEditModal} className="dark:bg-gray-600 dark:text-red-500 dark:border-gray-500">Cancel</Button>
+          <Button onClick={handleEditSubmit} className="dark:bg-gray-600 dark:text-green-500 dark:border-gray-500">Save</Button>
         </DialogActions>
       </Dialog>
     </Box>

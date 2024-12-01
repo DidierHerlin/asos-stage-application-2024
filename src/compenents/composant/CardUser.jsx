@@ -37,65 +37,68 @@ export default function CardUser() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center text-gray-800 p-10 bg-gray-200">
-      {/* Component Start */}
+    <div className="flex items-center justify-center text-gray-800 p-10 bg-White dark:bg-gray-800 dark:text-gray-200">
       <div className="flex flex-wrap justify-between w-full max-w-6xl">
-        {error && <p className="text-red-500">{error}</p>} {/* Afficher l'erreur si elle existe */}
-
-        {/* Tile 1 */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        {/* Card 1: Total Rapports */}
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-gray-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-blue-400 h-12 w-12 rounded">
-            <SiVirustotal className="w-6 h-6 fill-current text-white-400" />
+            <SiVirustotal className="w-6 h-6 text-white" />
           </div>
           <div className="flex-grow flex flex-col ml-3">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Total Rapports</span>
-              <span className="text-blue-500 text-sm font-semibold ml-2">{loading ? '...' : stats.total_rapports}</span>
+              <span className="text-gray-500 dark:text-gray-300">Total Rapports</span>
+              <span className="text-blue-500 text-sm font-semibold ml-2">
+                {stats.total_rapports}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Tile 2 */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        {/* Card 2: Rapport en cours */}
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-slate-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-yellow-200 h-12 w-12 rounded">
-            <CgSearchLoading className="w-6 h-6 fill-current text-yellow-700" />
+            <CgSearchLoading className="w-6 h-6 text-yellow-700" />
           </div>
           <div className="flex-grow flex flex-col ml-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Rapports en attente</span>
-              <span className="text-yellow-500 text-sm font-semibold ml-2">{loading ? '...' : stats.en_attente_count}</span>
+              <span className="text-gray-500 dark:text-gray-300">Rapport en cours</span>
+              <span className="text-yellow-500 text-sm font-semibold ml-2">
+                {stats.en_attente_count}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Tile 3 */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        {/* Card 3: Rapports validés */}
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-slate-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-green-200 h-12 w-12 rounded">
-            <GrValidate className="w-6 h-6 fill-current text-green-700" />
+            <GrValidate className="w-6 h-6 text-green-700" />
           </div>
           <div className="flex-grow flex flex-col ml-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Rapports validés</span>
-              <span className="text-green-500 text-sm font-semibold ml-2">{loading ? '...' : stats.validés_count}</span>
+              <span className="text-gray-500 dark:text-gray-300">Rapports validés</span>
+              <span className="text-green-500 text-sm font-semibold ml-2">
+                {stats.validés_count}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Tile 4 */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        {/* Card 4: Rapports rejetés */}
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-slate-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-red-200 h-12 w-12 rounded">
-            <FaTrashRestore className="w-6 h-6 fill-current text-red-700" />
+            <FaTrashRestore className="w-6 h-6 text-red-700" />
           </div>
           <div className="flex-grow flex flex-col ml-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Rapports rejetés</span>
-              <span className="text-red-500 text-sm font-semibold ml-2">{loading ? '...' : stats.rejetés_count}</span>
+              <span className="text-gray-500 dark:text-gray-300">Rapports rejetés</span>
+              <span className="text-red-500 text-sm font-semibold ml-2">
+                {stats.rejetés_count}
+              </span>
             </div>
           </div>
         </div>
-
       </div>
-      {/* Component End */}
     </div>
   );
 }

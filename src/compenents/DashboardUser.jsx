@@ -3,6 +3,7 @@ import CardUser from './composant/CardUser';
 import NavBarUser from './NavBarUser';
 import TableRpuser from './TableRpuser';
 
+
 export default function Dashbord() {
   return (
     <NavBarUser>
@@ -11,9 +12,13 @@ export default function Dashbord() {
           <CardUser />
         </div>
         {/* Ajout d'un margin-top avec Tailwind CSS */}
-        <div className="mt-4">
-          <TableRpuser />
+        <div className="flex flex-wrap max-md:flex-col w-full mt-2 gap-6">
+          <div className="flex-grow basis-2/3 max-md:basis-full">
+            <TableRpuser />
+          </div>
+          
         </div>
+
       </div>
     </NavBarUser>
   );

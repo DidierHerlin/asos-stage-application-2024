@@ -76,12 +76,12 @@ const FormeAjoutRapports = () => {
 
   return (
     <Box component="main" sx={{ flexGrow: 1, padding: 3, marginTop: '64px' }}>
-      <Container>
-        <Card style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+      <Container className='dark:bg-slate-800 dark:text-white'>
+        <Card style={{ marginTop: '2rem', marginBottom: '2rem' }} className='dark:bg-slate-800 dark:text-white'>
           <CardContent>
-            <Typography variant="h5" style={{ textAlign: 'center' }}>Ajouter un Rapport</Typography>
+            <Typography variant="h5" style={{ textAlign: 'center' }} className='dark:bg-slate-500 dark:text-gray-200'>Ajouter un Rapport</Typography>
             {error && <Typography color="error">{error}</Typography>}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='dark:bg-slate-500 dark:text-gray-200'>
               <TextField
                 label="Titre"
                 variant="outlined"
@@ -90,6 +90,7 @@ const FormeAjoutRapports = () => {
                 value={titre}
                 onChange={(e) => setTitre(e.target.value)}
                 required
+                className='dark:bg-slate-500 dark:text-gray-200'
               />
               <TextField
                 label="Date"
@@ -101,6 +102,7 @@ const FormeAjoutRapports = () => {
                 value={dateCreation}
                 onChange={(e) => setDateCreation(e.target.value)}
                 required
+                className=' dark:text-gray-200'
               />
               <TextField
                 select
@@ -111,9 +113,10 @@ const FormeAjoutRapports = () => {
                 value={projetId}
                 onChange={(e) => setProjetId(e.target.value)}
                 required
+                className='dark:bg-slate-800 dark:text-white'
               >
                 {projets.map((projet) => (
-                  <MenuItem key={projet.id} value={projet.id}>
+                  <MenuItem key={projet.id} value={projet.id} className='dark:bg-slate-500 dark:text-gray-200'>
                     {projet.nom_projet}
                   </MenuItem>
                 ))}

@@ -8,7 +8,8 @@ export default function TablesProjet() {
         <div className="flex">
     
         <div className="flex-grow p-4">
-            <h2>Liste de projet</h2>
+        <p className='ml-5 text-lg'>Liste de projet</p>
+
             <TableProjet />
         </div>
         </div>

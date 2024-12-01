@@ -118,16 +118,16 @@ export default function FormeProfile() {
   
 
   return (
-    <section className="w-full bg-blueGray-50 flex items-center justify-center">
+    <section className="w-full bg-blueGray-50 flex items-center justify-center dark:bg-slate-700">
       <div className="w-full lg:w-8/12 px-4 mx-auto">
         <div className="w-full relative flex flex-col min-w-0 break-words mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
           <div className="w-full flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={handleSubmit}>
               <Section title="User Information">
-                <InputField label="Username" type="text" value={userData.username} name="username" onChange={handleChange} isEditing={isEditing} />
-                <InputField label="Email address" type="email" value={userData.email} name="email" onChange={handleChange} isEditing={isEditing} />
-                <InputField label="First Name" type="text" value={userData.first_name} name="first_name" onChange={handleChange} isEditing={isEditing} />
-                <InputField label="Last Name" type="text" value={userData.last_name} name="last_name" onChange={handleChange} isEditing={isEditing} />
+                <InputField label="Username" type="text" value={userData.username} name="username" onChange={handleChange} isEditing={isEditing} className="dark:bg-slate-400 dark:text-black"/>
+                <InputField label="Email address" type="email" value={userData.email} name="email" onChange={handleChange} isEditing={isEditing} className="dark:bg-slate-400 dark:text-black" />
+                <InputField label="First Name" type="text" value={userData.first_name} name="first_name" onChange={handleChange} isEditing={isEditing} className="dark:bg-slate-400 dark:text-black"/>
+                <InputField label="Last Name" type="text" value={userData.last_name} name="last_name" onChange={handleChange} isEditing={isEditing} className="dark:bg-slate-400 dark:text-black"/>
               </Section>
 
               <div className="flex justify-end mt-6 space-x-3">
@@ -147,7 +147,7 @@ export default function FormeProfile() {
       </div>
 
       {/* Change Password Section */}
-      <div className="w-full lg:w-8/12 px-4 mx-auto mt-8">
+      <div className="w-full lg:w-8/12 px-4 mx-auto mt-8 dark:bg-slate-700" >
         <div className="w-full relative flex flex-col min-w-0 break-words mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
           <div className="w-full flex-auto px-4 lg:px-10 py-10 pt-0">
             <form onSubmit={ModfierMotDepasse}>

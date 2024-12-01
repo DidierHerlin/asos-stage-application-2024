@@ -55,64 +55,64 @@ const Card = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center text-gray-800 p-10 bg-gray-200">
+    <div className="flex items-center justify-center text-gray-800 p-10 bg-White dark:bg-gray-800 dark:text-gray-200">
       <div className="flex flex-wrap justify-between w-full max-w-6xl">
         {/* Card 1: Total Rapports */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-gray-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-blue-400 h-12 w-12 rounded">
-            <svg className="w-6 h-6 fill-current text-white-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <SiVirustotal />
-            </svg>
+            <SiVirustotal className="w-6 h-6 text-white" />
           </div>
           <div className="flex-grow flex flex-col ml-3">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Total Rapports</span>
-              <span className="text-blue-500 text-sm font-semibold ml-2">{reportData.totalReports}</span>
+              <span className="text-gray-500 dark:text-gray-300">Total Rapports</span>
+              <span className="text-blue-500 text-sm font-semibold ml-2">
+                {reportData.totalReports}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Card 2: Rapport en cours */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-slate-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-yellow-200 h-12 w-12 rounded">
-            <svg className="w-6 h-6 fill-current text-yellow-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <CgSearchLoading />
-            </svg>
+            <CgSearchLoading className="w-6 h-6 text-yellow-700" />
           </div>
           <div className="flex-grow flex flex-col ml-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Rapport en cours</span>
-              <span className="text-yellow-500 text-sm font-semibold ml-2">{reportData.pendingReports}</span>
+              <span className="text-gray-500 dark:text-gray-300">Rapport en cours</span>
+              <span className="text-yellow-500 text-sm font-semibold ml-2">
+                {reportData.pendingReports}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Card 3: Rapports validés */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-slate-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-green-200 h-12 w-12 rounded">
-            <svg className="w-6 h-6 fill-current text-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <GrValidate />
-            </svg>
+            <GrValidate className="w-6 h-6 text-green-700" />
           </div>
           <div className="flex-grow flex flex-col ml-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Rapports validés</span>
-              <span className="text-green-500 text-sm font-semibold ml-2">{reportData.approvedReports}</span>
+              <span className="text-gray-500 dark:text-gray-300">Rapports validés</span>
+              <span className="text-green-500 text-sm font-semibold ml-2">
+                {reportData.approvedReports}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Card 4: Rapports rejetés */}
-        <div className="flex items-center p-4 bg-white rounded w-full sm:w-[320px] lg:w-[280px] h-[80px]">
+        <div className="flex items-center p-4 bg-gray-200 rounded w-full sm:w-[320px] lg:w-[280px] h-[80px] dark:bg-slate-600 dark:text-gray-200 shadow">
           <div className="flex flex-shrink-0 items-center justify-center bg-red-200 h-12 w-12 rounded">
-            <svg className="w-6 h-6 fill-current text-red-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <FaTrashRestore />
-            </svg>
+            <FaTrashRestore className="w-6 h-6 text-red-700" />
           </div>
           <div className="flex-grow flex flex-col ml-4">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Rapports rejetés</span>
-              <span className="text-red-500 text-sm font-semibold ml-2">{reportData.rejectedReports}</span> {/* Remplacez ceci par la valeur si disponible */}
+              <span className="text-gray-500 dark:text-gray-300">Rapports rejetés</span>
+              <span className="text-red-500 text-sm font-semibold ml-2">
+                {reportData.rejectedReports}
+              </span>
             </div>
           </div>
         </div>

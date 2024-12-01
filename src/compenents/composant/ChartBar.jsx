@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { TEChart } from "tw-elements-react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from 'recharts';
+  import React, { useEffect, useState } from "react";
+  import { TEChart } from "tw-elements-react";
+  import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer
+  } from 'recharts';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
@@ -108,47 +108,61 @@ export default function ChartBar() {
   // Prepare data for the chart
   const labels = reportData.map(data => data.month);
   const counts = reportData.map(data => data.count);
+  const isDarkMode = document.documentElement.classList.contains("dark");
 
   return (
-    <div className="w-2/3
-     h-[480px] me-4 p-4 bg-white rounded-lg shadow-lg">
-  <h2 className="text-xl font-semibold mb-4 text-gray-800">Monthly Reports Analysis</h2>
-  <ResponsiveContainer width="100%" height="100%">
-    <BarChart
-      data={reportData}
-      margin={{
-        top: 20,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
-      <XAxis 
-        dataKey="month" 
-        className="text-sm"
-      />
-      <YAxis 
-        className="text-sm"
-        tickFormatter={(value) => Math.round(value)}
-      />
-      <Tooltip
-        contentStyle={{
-          backgroundColor: 'white',
-          border: 'none',
-          borderRadius: '8px',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    <div className="w-2/3 h-[480px] me-4 p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-200" >
+  <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:bg-gray-800 dark:text-gray-200">Monthly Reports Analysis</h2>
+  <ResponsiveContainer width="100%" height="100%" className="dark:bg-gray-800 dark:text-gray-200">
+      <BarChart
+        data={reportData}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 20,
+          bottom: 5,
         }}
-      />
-      <Legend />
-      <Bar
-        dataKey="count"
-        fill="#6366f1"
-        radius={[4, 4, 0, 0]}
-        name="Number of Reports"
-      />
-    </BarChart>
-  </ResponsiveContainer>
+      >
+        <CartesianGrid 
+          strokeDasharray="3 3" 
+          stroke={isDarkMode ? "#4B5563" : "#E5E7EB"} // Gris sombre pour mode sombre
+          className="opacity-30" 
+        />
+        <XAxis 
+          dataKey="month" 
+          tick={{ fill: isDarkMode ? "#D1D5DB" : "#374151" }} // Texte gris clair ou foncé
+          className="text-sm"
+        />
+        <YAxis 
+          tick={{ fill: isDarkMode ? "#D1D5DB" : "#374151" }} // Texte gris clair ou foncé
+          className="text-sm"
+          tickFormatter={(value) => Math.round(value)}
+        />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: isDarkMode ? "#1F2937" : "white", // Gris sombre ou blanc
+            color: isDarkMode ? "#D1D5DB" : "#374151", // Texte adapté
+            border: "none",
+            borderRadius: "8px",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+          }}
+          itemStyle={{
+            color: isDarkMode ? "#D1D5DB" : "#374151",
+          }}
+        />
+        <Legend 
+          wrapperStyle={{
+            color: isDarkMode ? "#D1D5DB" : "#374151", // Couleur de la légende
+          }}
+        />
+        <Bar
+          dataKey="count"
+          fill={isDarkMode ? "#4F46E5" : "#6366F1"} // Violet ajusté pour mode sombre
+          radius={[4, 4, 0, 0]}
+          name="Number of Reports"
+        />
+      </BarChart>
+    </ResponsiveContainer>
 </div>
 
   );

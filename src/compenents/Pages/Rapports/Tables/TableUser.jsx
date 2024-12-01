@@ -179,31 +179,34 @@ const TableUser = () => {
         value={searchTerm}
         onChange={handleSearchChange}
         sx={{ marginBottom: 2 }}
+        InputLabelProps={{ shrink: true, className: 'dark:text-gray-400' }}
+          className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500"
+          
       />
       <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{ marginBottom: 2 }}>
         Nouvel Employer
       </Button>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
+      <TableContainer component={Paper} className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+        <Table className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+          <TableHead className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>Pseudo</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Nom</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Prenom</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Email</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Action</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 ">Pseudo</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 ">Nom</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 ">Prenom</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 ">Email</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} className="dark:bg-gray-600 dark:text-gray-200 ">Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className="dark:bg-gray-600 dark:text-gray-200 ">
             {paginatedUsers.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.username}</TableCell>
-                <TableCell>{user.last_name}</TableCell>
-                <TableCell>{user.first_name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>
-                  <Tooltip title="Edit">
+                <TableCell className="dark:bg-gray-800 dark:text-gray-200 ">{user.username}</TableCell>
+                <TableCell className="dark:bg-gray-800 dark:text-gray-200 ">{user.last_name}</TableCell>
+                <TableCell className="dark:bg-gray-800 dark:text-gray-200 ">{user.first_name}</TableCell>
+                <TableCell className="dark:bg-gray-800 dark:text-gray-200 ">{user.email}</TableCell>
+                <TableCell className="dark:bg-gray-800 dark:text-gray-200 ">
+                  <Tooltip title="Edit" className="dark:bg-gray-600 dark:text-green-500 ">
                     <IconButton onClick={() => handleOpenEditModal(user)}>
                       <EditIcon />
                     </IconButton>
@@ -226,6 +229,7 @@ const TableUser = () => {
         count={filteredUsers.length}
         rowsPerPage={rowsPerPage}
         page={page}
+        className="dark:bg-gray-600 dark:text-gray-200"
         onPageChange={(event, newPage) => setPage(newPage)}
         onRowsPerPageChange={(event) => {
           setRowsPerPage(parseInt(event.target.value, 10));
@@ -234,11 +238,11 @@ const TableUser = () => {
       />
 
       {/* Create User Dialog */}
-      <Dialog open={isCreating} onClose={handleCloseModal}>
-  <DialogTitle>Créer un nouvel utilisateur</DialogTitle>
-  <DialogContent>
-    <form onSubmit={handleSubmit}>
-      <FormControl fullWidth margin="normal">
+<Dialog open={isCreating} onClose={handleCloseModal} >
+  <DialogTitle className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">Créer un nouvel utilisateur</DialogTitle>
+  <DialogContent className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+    <form onSubmit={handleSubmit} className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+      <FormControl fullWidth margin="normal" className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
         <InputLabel id="is_superuser-label">Statut</InputLabel>
         <Select
           labelId="is_superuser-label"
@@ -299,10 +303,10 @@ const TableUser = () => {
         required
       />
       <DialogActions>
-        <Button onClick={handleCloseModal} color="primary">
+        <Button onClick={handleCloseModal} color="primary" className="dark:bg-gray-600 dark:text-red-500 dark:border-gray-500">
           Annuler
         </Button>
-        <Button type="submit" color="primary">
+        <Button type="submit" color="primary" className="dark:bg-gray-600 dark:text-green-500 dark:border-gray-500">
           Ajouter
         </Button>
       </DialogActions>
@@ -313,8 +317,8 @@ const TableUser = () => {
 
       {/* Edit User Dialog */}
       <Dialog open={isEditing} onClose={handleCloseEditModal}>
-        <DialogTitle>Edit User</DialogTitle>
-        <DialogContent>
+        <DialogTitle className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">Modifier Utilisateur</DialogTitle>
+        <DialogContent className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
           {currentUser && (
             <>
               <TextField
@@ -323,6 +327,10 @@ const TableUser = () => {
                 name="username"
                 value={currentUser.username}
                 onChange={(e) => setCurrentUser({ ...currentUser, username: e.target.value })}
+               
+               
+                margin="normal"
+                required
               />
               <TextField
                 label="Nom"
@@ -330,6 +338,8 @@ const TableUser = () => {
                 name="last_name"
                 value={currentUser.last_name}
                 onChange={(e) => setCurrentUser({ ...currentUser, last_name: e.target.value })}
+                margin="normal"
+                required
               />
               <TextField
                 label="Prenom"
@@ -337,6 +347,8 @@ const TableUser = () => {
                 name="first_name"
                 value={currentUser.first_name}
                 onChange={(e) => setCurrentUser({ ...currentUser, first_name: e.target.value })}
+                margin="normal"
+                required
               />
               <TextField
                 label="Email"
@@ -344,13 +356,15 @@ const TableUser = () => {
                 name="email"
                 value={currentUser.email}
                 onChange={(e) => setCurrentUser({ ...currentUser, email: e.target.value })}
+                margin="normal"
+                required
               />
             </>
           )}
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEditModal}>Cancel</Button>
-          <Button onClick={handleEditSubmit} color="primary">Save</Button>
+        <DialogActions className="dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500">
+          <Button onClick={handleCloseEditModal} className="dark:bg-gray-600 dark:text-red-500 dark:border-gray-500">Cancel</Button>
+          <Button onClick={handleEditSubmit} color="primary" className="dark:bg-gray-600 dark:text-green-500 dark:border-gray-500">Save</Button>
         </DialogActions>
       </Dialog>
     </Box>

@@ -9,6 +9,8 @@ export default function ChartDoughnut() {
   const [statusData, setStatusData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
 
   const isAccessTokenExpired = (token) => {
     try {
@@ -123,9 +125,24 @@ export default function ChartDoughnut() {
   };
 
   return (
-    <div className="w-1/3 p-4 bg-white rounded-lg shadow-lg">
+    <div className="w-1/3 p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-200">
       <ResponsiveContainer width="100%" height="100%">
-        <TEChart type="doughnut" data={chartData} />
+        <TEChart
+          type="doughnut"
+          data={chartData}
+          options={{
+            plugins: {
+              legend: {
+                labels: {
+                  color: isDarkMode ? "#D1D5DB" : "#374151", // Gris clair pour sombre, gris foncé pour clair
+                },
+              },
+            },
+            maintainAspectRatio: false,
+            backgroundColor: isDarkMode ? "#1F2937" : "#FFFFFF", // Fond sombre ou clair
+            borderColor: isDarkMode ? "#4B5563" : "#E5E7EB", // Bordure adaptée
+          }}
+        />
       </ResponsiveContainer>
     </div>
   );

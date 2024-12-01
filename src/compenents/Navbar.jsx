@@ -1,5 +1,5 @@
 // src/components/Navbar.js
-import React, { useState } from "react";
+import React, { useState,useEffect  } from "react";
 import {
     BsArrowLeftShort,
     BsSearch,
@@ -19,11 +19,25 @@ import Asos_img from "../logo/Asos_img.jpg";
 
 export default function Navbar({ children }) {
     const [open, setOpen] = useState(true);
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    const toggleDarkMode = () => {
-        setIsDarkMode(prev => !prev);
-    };
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        return localStorage.getItem("dark-mode") === "true";
+      });
+    
+      const toggleDarkMode = () => {
+        setIsDarkMode((prev) => {
+          const newMode = !prev;
+          localStorage.setItem("dark-mode", newMode.toString());
+          return newMode;
+        });
+      };
+    
+      useEffect(() => {
+        if (isDarkMode) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }, [isDarkMode]);
 
     // Définition des éléments du menu
     const Menus = [

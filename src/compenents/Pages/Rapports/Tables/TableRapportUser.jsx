@@ -291,32 +291,34 @@ const TableRapportUser = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           sx={{ flexGrow: 1, minWidth: '200px' }}
+          className='dark:bg-slate-500 dark:text-gray-200'
         />
         
-        <FormControl variant="outlined" sx={{ minWidth: '200px' }}>
-          <InputLabel>Statut</InputLabel>
+        <FormControl variant="outlined" sx={{ minWidth: '200px' }} className='dark:bg-slate-500 dark:text-gray-200'>
+          <InputLabel className='dark:bg-slate-500 dark:text-gray-200'>Statut</InputLabel>
           <Select
             value={selectedStatut}
             onChange={(e) => setSelectedStatut(e.target.value)}
             label="Statut"
+            
           >
-            <MenuItem value="">Tous</MenuItem>
-            <MenuItem value={0}>Rejeté</MenuItem>
-            <MenuItem value={1}>Validé</MenuItem>
-            <MenuItem value={2}>En attente</MenuItem>
+            <MenuItem value="Tous" className='dark:bg-slate-500 dark:text-gray-200'>Tous</MenuItem>
+            <MenuItem value={0} className='dark:bg-slate-500 dark:text-gray-200'>Rejeté</MenuItem>
+            <MenuItem value={1} className='dark:bg-slate-500 dark:text-gray-200'>Validé</MenuItem>
+            <MenuItem value={2} className='dark:bg-slate-500 dark:text-gray-200'>En attente</MenuItem>
           </Select>
         </FormControl>
 
-        <FormControl variant="outlined" sx={{ minWidth: '200px' }}>
-          <InputLabel>Projet</InputLabel>
+        <FormControl variant="outlined" sx={{ minWidth: '200px' }} className='dark:bg-slate-500 dark:text-gray-200'>
+          <InputLabel className='dark:bg-slate-500 dark:text-gray-200'>Projet</InputLabel>
           <Select
             value={selectedProjet}
             onChange={(e) => setSelectedProjet(e.target.value)}
             label="Projet"
           >
-            <MenuItem value="">Tous</MenuItem>
+            <MenuItem value="Tous" className='dark:bg-slate-500 dark:text-gray-200'> Tous</MenuItem>
             {projets.map((projet) => (
-              <MenuItem key={projet.id} value={projet.id}>
+              <MenuItem key={projet.id} value={projet.id} className='dark:bg-slate-500 dark:text-gray-200'>
                 {projet.nom_projet}
               </MenuItem>
             ))}
@@ -331,6 +333,7 @@ const TableRapportUser = () => {
           onChange={(e) => setStartDate(e.target.value)}
           InputLabelProps={{ shrink: true }}
           sx={{ minWidth: '200px' }}
+          className='dark:bg-slate-500 dark:text-gray-200'
         />
 
         <TextField
@@ -341,32 +344,33 @@ const TableRapportUser = () => {
           onChange={(e) => setEndDate(e.target.value)}
           InputLabelProps={{ shrink: true }}
           sx={{ minWidth: '200px' }}
+          className='dark:bg-slate-500 dark:text-gray-200'
         />
       </Box>
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className='dark:bg-slate-800 dark:text-gray-200'>
         <Table>
-          <TableHead>
+          <TableHead className='dark:bg-slate-500 dark:text-gray-200'>
             <TableRow>
-              <TableCell style={{ fontWeight: 'bold' }}>Titre</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }}>Projet</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }}>Description</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }}>Date de création</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }}>Statut</TableCell>
-              <TableCell style={{ fontWeight: 'bold' }}>Actions</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }} className=' dark:text-gray-200'>Titre</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }} className=' dark:text-gray-200'>Projet</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}  className=' dark:text-gray-200'>Description</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }} className=' dark:text-gray-200'>Date de création</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }} className=' dark:text-gray-200'>Statut</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }} className=' dark:text-gray-200'>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredRows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.titre}</TableCell>
-                  <TableCell>
+                <TableRow key={row.id} >
+                  <TableCell className=' dark:text-gray-200'>{row.titre}</TableCell>
+                  <TableCell className=' dark:text-gray-200'>
                     {projets.find(p => p.id === row.projet_id)?.nom_projet || 'N/A'}
                   </TableCell>
-                  <TableCell>{row.description || row.contenue}</TableCell>
-                  <TableCell>
+                  <TableCell className=' dark:text-gray-200'>{row.description || row.contenue}</TableCell>
+                  <TableCell className=' dark:text-gray-200'>
                     {new Date(row.date_creation).toLocaleDateString('fr-FR')}
                   </TableCell>
                   <TableCell
